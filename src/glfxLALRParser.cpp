@@ -1870,9 +1870,10 @@ yyreduce:
     ostringstream theShader;
     
     theShader<<"#version "<<(yyvsp[(3) - (10)]).num<<endl;
-    theShader<<(yyvsp[(9) - (10)]).strs[0];
     theShader<<gEffect->m_sharedCode.str();
-    map<string, string>::const_iterator it=gEffect->m_shaders.find((yyvsp[(6) - (10)]).strs[0]);
+        theShader<<(yyvsp[(9) - (10)]).strs[0];
+
+        map<string, string>::const_iterator it=gEffect->m_shaders.find((yyvsp[(6) - (10)]).strs[0]);
     if(it==gEffect->m_shaders.end()) {
         ostringstream errMsg;
         errMsg<<"Unable to find referenced shader \""<<(yyvsp[(6) - (10)]).strs[0]<<'\"';

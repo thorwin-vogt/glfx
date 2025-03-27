@@ -24,25 +24,38 @@ FILE( GLOB SOURCE_FILES
 )
 SOURCE_GROUP( "Source Files" FILES ${SOURCE_FILES} )
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+
+if(CMAKE_VERSION VERSION_LESS "3.7.0")
+    set(CMAKE_INCLUDE_CURRENT_DIR ON)
+endif()
+
 IF(WIN32)
-    include_directories( "./../glew/include" "./../include" )
-    link_directories( "./../glew/lib" )
+    include_directories("./../include" )
 ELSEIF(UNIX)
     include_directories( "./../include" )
 ENDIF(WIN32)
+
+find_package(Qt5 COMPONENTS Gui REQUIRED)
 
 add_library( glfx SHARED ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 add_library( glfx_static STATIC ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 
 IF(WIN32)
-target_link_libraries( glfx "glew32")
 set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DWIN32 -DUNICODE -D_UNICODE -DGLFX_BUILD" )
-set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DWIN32 -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC -DGLEW_STATIC" )
+set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DWIN32 -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC")
 ELSEIF(UNIX)
-target_link_libraries( glfx "GL" "GLEW")
 set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICODE -DGLFX_BUILD" )
-set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC -DGLEW_STATIC" )
+set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC")
 ENDIF(WIN32)
+
+target_link_libraries(glfx Qt5::Gui)
+target_link_libraries(glfx_static Qt5::Gui)
 
 IF(NOT WIN32)
 INSTALL(FILES ./../include/gl/glfx.h DESTINATION ${INCLUDE_INSTALL_DIR})

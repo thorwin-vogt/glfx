@@ -35,7 +35,8 @@ typedef int errno_t;
 #include <errno.h>
 #endif
 
-#include "GL/glew.h"
+#include <QOpenGLFunctions_4_3_Core>
+#include <QOpenGLContext>
 
 // workaround for Linux distributions that haven't yet upgraded to GLEW 1.9
 #ifndef GL_COMPUTE_SHADER
@@ -100,8 +101,11 @@ unsigned Program::CompileAndLink(string& log) const
 {
     vector<GLuint> shaders;
     ostringstream sLog;
-    
-    GLuint programId=glCreateProgram();
+
+    auto *ctx = QOpenGLContext::currentContext();
+    auto *f = ctx->versionFunctions<QOpenGLFunctions_4_3_Core>();
+
+    GLuint programId=f->glCreateProgram();
     
     GLint res=1;
     GLenum shaderTypes[NUM_OF_SHADER_TYPES]={GL_VERTEX_SHADER,
@@ -112,31 +116,31 @@ unsigned Program::CompileAndLink(string& log) const
                                             GL_COMPUTE_SHADER};
     for(int i=0;i<NUM_OF_SHADER_TYPES;i++) {
         if(m_shaders[i].src.size()>0) {
-            shaders.push_back(glCreateShader(shaderTypes[i]));
+            shaders.push_back(f->glCreateShader(shaderTypes[i]));
             res&=CompileShader(shaders.back(), m_shaders[i], sLog);
-            glAttachShader(programId, shaders.back());
+            f->glAttachShader(programId, shaders.back());
         }
     }
     
     if(m_separable)
-        glProgramParameteri(programId, GL_PROGRAM_SEPARABLE, GL_TRUE);
+        f->glProgramParameteri(programId, GL_PROGRAM_SEPARABLE, GL_TRUE);
 
-    glLinkProgram(programId);
+    f->glLinkProgram(programId);
 
     for(vector<GLuint>::const_iterator it=shaders.begin();it!=shaders.end();++it) {
-        glDetachShader(programId, *it);
-        glDeleteShader(*it);
+        f->glDetachShader(programId, *it);
+        f->glDeleteShader(*it);
     }
     
     GLint tmp;
-    glGetProgramiv(programId, GL_LINK_STATUS, &tmp);
+    f->glGetProgramiv(programId, GL_LINK_STATUS, &tmp);
     res&=tmp;
     
     sLog<<"Status: Link "<<(res ? "successful" : "failed")<<endl;
-    
-    glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &tmp);
+
+    f->glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &tmp);
     char* infoLog = new char[tmp];
-    glGetProgramInfoLog(programId, tmp, &tmp, infoLog);
+    f->glGetProgramInfoLog(programId, tmp, &tmp, infoLog);
     sLog<<"Linkage details:"<<endl<<infoLog<<endl;
     delete[] infoLog;
     
@@ -149,19 +153,22 @@ unsigned Program::CompileAndLink(string& log) const
 
 int Program::CompileShader( unsigned shader, const Shader& shaderSrc, ostringstream& sLog ) const
 {
+    auto *ctx = QOpenGLContext::currentContext();
+    auto *f = ctx->versionFunctions<QOpenGLFunctions_4_3_Core>();
+
     const char* strSrc=shaderSrc.src.c_str();
-    glShaderSource(shader, 1, &strSrc, NULL);
-    glCompileShader(shader);
+    f->glShaderSource(shader, 1, &strSrc, NULL);
+    f->glCompileShader(shader);
     
     GLint tmp,res;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &tmp);
+    f->glGetShaderiv(shader, GL_COMPILE_STATUS, &tmp);
     res=tmp;
     
     sLog<<"Status: "<<shaderSrc.name<<" shader compiled with"<<(tmp ? "out" : "")<<" errors"<<endl;
-    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &tmp);
+    f->glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &tmp);
 
     char* infoLog=new char[tmp];
-    glGetShaderInfoLog(shader, tmp, &tmp, infoLog);
+    f->glGetShaderInfoLog(shader, tmp, &tmp, infoLog);
     sLog<<"Compilation details for "<<shaderSrc.name<<" shader:"<<endl<<infoLog<<endl;
     delete[] infoLog;
 
@@ -362,19 +369,22 @@ string Sampler::Descriptor() const
 
 unsigned Sampler::CreateSamplerObject() const
 {
+    auto *ctx = QOpenGLContext::currentContext();
+    auto *f = ctx->versionFunctions<QOpenGLFunctions_4_3_Core>();
+
     GLuint samplerObj;
-    glGenSamplers(1, &samplerObj);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_MIN_FILTER, m_minFilters.find(m_stringParams.find("MinFilter")->second)->second);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_MAG_FILTER, m_magFilters.find(m_stringParams.find("MagFilter")->second)->second);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_WRAP_S, m_wrapModes.find(m_stringParams.find("WrapS")->second)->second);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_WRAP_T, m_wrapModes.find(m_stringParams.find("WrapT")->second)->second);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_WRAP_R, m_wrapModes.find(m_stringParams.find("WrapR")->second)->second);
-    glSamplerParameterf(samplerObj, GL_TEXTURE_MIN_LOD, m_floatParams.find("MinLod")->second);
-    glSamplerParameterf(samplerObj, GL_TEXTURE_MAX_LOD, m_floatParams.find("MaxLod")->second);
-    glSamplerParameterf(samplerObj, GL_TEXTURE_LOD_BIAS, m_floatParams.find("LodBias")->second);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_COMPARE_MODE, m_cmpModes.find(m_stringParams.find("CmpMode")->second)->second);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_COMPARE_FUNC, m_compareFuncs.find(m_stringParams.find("CmpFunc")->second)->second);
-    glSamplerParameteri(samplerObj, GL_TEXTURE_MAX_ANISOTROPY_EXT, m_intParams.find("Aniso")->second);
+    f->glGenSamplers(1, &samplerObj);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_MIN_FILTER, m_minFilters.find(m_stringParams.find("MinFilter")->second)->second);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_MAG_FILTER, m_magFilters.find(m_stringParams.find("MagFilter")->second)->second);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_WRAP_S, m_wrapModes.find(m_stringParams.find("WrapS")->second)->second);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_WRAP_T, m_wrapModes.find(m_stringParams.find("WrapT")->second)->second);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_WRAP_R, m_wrapModes.find(m_stringParams.find("WrapR")->second)->second);
+    f->glSamplerParameterf(samplerObj, GL_TEXTURE_MIN_LOD, m_floatParams.find("MinLod")->second);
+    f->glSamplerParameterf(samplerObj, GL_TEXTURE_MAX_LOD, m_floatParams.find("MaxLod")->second);
+    f->glSamplerParameterf(samplerObj, GL_TEXTURE_LOD_BIAS, m_floatParams.find("LodBias")->second);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_COMPARE_MODE, m_cmpModes.find(m_stringParams.find("CmpMode")->second)->second);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_COMPARE_FUNC, m_compareFuncs.find(m_stringParams.find("CmpFunc")->second)->second);
+    f->glSamplerParameteri(samplerObj, GL_TEXTURE_MAX_ANISOTROPY_EXT, m_intParams.find("Aniso")->second);
 
     return samplerObj;
 }
@@ -389,6 +399,42 @@ int GLFX_APIENTRY glfxGenEffect()
 {
     gEffects.push_back(new Effect);
     return (int)gEffects.size()-1;
+}
+
+bool GLFX_APIENTRY glfxParsePreprocessedEffectFromFile( int effect, const char* src, const char* file )
+{
+    bool retVal=true;
+    try {
+        gEffect=gEffects[effect];
+        string fname(file);
+        size_t lastSlash=fname.find_last_of('/')+1;
+        size_t lastBackSlash=fname.find_last_of('\\')+1;
+        lastSlash=max(lastSlash, lastBackSlash);
+        gEffect->Dir()=fname.substr(0, lastSlash);
+        glfx_scan_string(src);
+        glfxset_lineno(1);
+        glfxparse();
+    }
+    catch(const char* err) {
+        gEffect->Log()<<err<<endl;
+        gEffect->Active()=false;
+        retVal=false;
+    }
+    catch(const string& err) {
+        gEffect->Log()<<err<<endl;
+        gEffect->Active()=false;
+        retVal=false;
+    }
+    catch(...) {
+        gEffect->Log()<<"Unknown error occurred during parsing of source"<<endl;
+        gEffect->Active()=false;
+        retVal=false;
+    }
+
+    glfxpop_buffer_state();
+
+    gEffect->PopulateProgramList();
+    return retVal;
 }
 
 bool GLFX_APIENTRY glfxParseEffectFromFile( int effect, const char* file )

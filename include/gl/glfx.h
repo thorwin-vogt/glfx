@@ -69,6 +69,16 @@ GLFXAPI int GLFX_APIENTRY glfxGenEffect();
 GLFXAPI bool GLFX_APIENTRY glfxParseEffectFromFile( int effect, const char* file );
 
 /**************************************************
+* glfxCreateEffectFromFile
+* Input:
+*   effect  -- GLFX effect id
+*   src    -- Source
+*   file    -- File name
+* Return value: Status
+**************************************************/
+GLFXAPI bool GLFX_APIENTRY glfxParsePreprocessedEffectFromFile( int effect, const char* src, const char* file );
+
+/**************************************************
 * glfxCreateEffectFromMemory
 * Input:
 *   effect  -- GLFX effect id

@@ -37,6 +37,7 @@ typedef int errno_t;
 
 #include <QOpenGLFunctions_4_3_Core>
 #include <QOpenGLContext>
+#include <QOpenGLVersionFactory>
 
 // workaround for Linux distributions that haven't yet upgraded to GLEW 1.9
 #ifndef GL_COMPUTE_SHADER
@@ -103,7 +104,7 @@ unsigned Program::CompileAndLink(string& log) const
     ostringstream sLog;
 
     auto *ctx = QOpenGLContext::currentContext();
-    auto *f = ctx->versionFunctions<QOpenGLFunctions_4_3_Core>();
+    auto *f = QOpenGLVersionFactory::get<QOpenGLFunctions_4_3_Core>(ctx);
 
     GLuint programId=f->glCreateProgram();
     
@@ -154,7 +155,7 @@ unsigned Program::CompileAndLink(string& log) const
 int Program::CompileShader( unsigned shader, const Shader& shaderSrc, ostringstream& sLog ) const
 {
     auto *ctx = QOpenGLContext::currentContext();
-    auto *f = ctx->versionFunctions<QOpenGLFunctions_4_3_Core>();
+    auto *f = QOpenGLVersionFactory::get<QOpenGLFunctions_4_3_Core>(ctx);
 
     const char* strSrc=shaderSrc.src.c_str();
     f->glShaderSource(shader, 1, &strSrc, NULL);
@@ -370,7 +371,7 @@ string Sampler::Descriptor() const
 unsigned Sampler::CreateSamplerObject() const
 {
     auto *ctx = QOpenGLContext::currentContext();
-    auto *f = ctx->versionFunctions<QOpenGLFunctions_4_3_Core>();
+    auto *f = QOpenGLVersionFactory::get<QOpenGLFunctions_4_3_Core>(ctx);
 
     GLuint samplerObj;
     f->glGenSamplers(1, &samplerObj);

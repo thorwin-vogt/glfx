@@ -24,7 +24,7 @@ FILE( GLOB SOURCE_FILES
 )
 SOURCE_GROUP( "Source Files" FILES ${SOURCE_FILES} )
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_AUTOMOC ON)
@@ -41,7 +41,7 @@ ELSEIF(UNIX)
     include_directories( "./../include" )
 ENDIF(WIN32)
 
-find_package(Qt6 COMPONENTS Gui REQUIRED)
+find_package(Qt6 COMPONENTS Gui OpenGL REQUIRED)
 
 add_library( glfx SHARED ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 add_library( glfx_static STATIC ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
@@ -54,8 +54,8 @@ set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICO
 set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC")
 ENDIF(WIN32)
 
-target_link_libraries(glfx Qt6::Gui)
-target_link_libraries(glfx_static Qt6::Gui)
+target_link_libraries(glfx Qt6::Gui Qt6::OpenGL)
+target_link_libraries(glfx_static Qt6::Gui Qt6::OpenGL)
 
 IF(NOT WIN32)
 INSTALL(FILES ./../include/gl/glfx.h DESTINATION ${INCLUDE_INSTALL_DIR})

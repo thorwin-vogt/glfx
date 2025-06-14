@@ -29,6 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 #include <sstream>
 #include <cstdio>
 #include <cassert>
+#include <iostream>
 
 #ifndef _MSC_VER
 typedef int errno_t;
@@ -38,6 +39,7 @@ typedef int errno_t;
 #include <QOpenGLFunctions_4_3_Core>
 #include <QOpenGLContext>
 #include <QOpenGLVersionFunctionsFactory>
+#include <QtGlobal>
 
 // workaround for Linux distributions that haven't yet upgraded to GLEW 1.9
 #ifndef GL_COMPUTE_SHADER
@@ -106,7 +108,7 @@ unsigned Program::CompileAndLink(string& log) const
     auto *ctx = QOpenGLContext::currentContext();
     auto *f = QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_4_3_Core>(ctx);
 
-    GLuint programId=f->glCreateProgram();
+    GLuint programId = f->glCreateProgram();
     
     GLint res=1;
     GLenum shaderTypes[NUM_OF_SHADER_TYPES]={GL_VERTEX_SHADER,
@@ -122,7 +124,6 @@ unsigned Program::CompileAndLink(string& log) const
             f->glAttachShader(programId, shaders.back());
         }
     }
-    
     if(m_separable)
         f->glProgramParameteri(programId, GL_PROGRAM_SEPARABLE, GL_TRUE);
 
@@ -142,7 +143,8 @@ unsigned Program::CompileAndLink(string& log) const
     f->glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &tmp);
     char* infoLog = new char[tmp];
     f->glGetProgramInfoLog(programId, tmp, &tmp, infoLog);
-    sLog<<"Linkage details:"<<endl<<infoLog<<endl;
+    std::string infoLogStr(infoLog, tmp);
+    sLog<<"Linkage details:"<<endl<<infoLogStr<<endl;
     delete[] infoLog;
     
     log=sLog.str();
@@ -170,7 +172,8 @@ int Program::CompileShader( unsigned shader, const Shader& shaderSrc, ostringstr
 
     char* infoLog=new char[tmp];
     f->glGetShaderInfoLog(shader, tmp, &tmp, infoLog);
-    sLog<<"Compilation details for "<<shaderSrc.name<<" shader:"<<endl<<infoLog<<endl;
+    std::string infoLogStr(infoLog, tmp);
+    sLog<<"Compilation details for "<<shaderSrc.name<<" shader:"<<endl<<infoLogStr<<endl;
     delete[] infoLog;
 
     return res;
@@ -417,7 +420,8 @@ bool GLFX_APIENTRY glfxParsePreprocessedEffectFromFile( int effect, const char* 
         glfxparse();
     }
     catch(const char* err) {
-        gEffect->Log()<<err<<endl;
+        std::string errStr(err);
+        gEffect->Log()<<errStr<<endl;
         gEffect->Active()=false;
         retVal=false;
     }
@@ -463,7 +467,8 @@ bool GLFX_APIENTRY glfxParseEffectFromFile( int effect, const char* file )
         glfxparse();
     }
     catch(const char* err) {
-        gEffect->Log()<<err<<endl;
+        std::string errStr(err);
+        gEffect->Log()<<errStr<<endl;
         gEffect->Active()=false;
         retVal=false;
     }
@@ -496,7 +501,8 @@ bool GLFX_APIENTRY glfxParseEffectFromMemory( int effect, const char* src )
         glfxparse();
     }
     catch(const char* err) {
-        gEffect->Log()<<err<<endl;
+        std::string errStr(err);
+        gEffect->Log()<<errStr<<endl;
         gEffect->Active()=false;
         retVal=false;
     }
@@ -579,7 +585,8 @@ int GLFX_APIENTRY glfxCompileProgram(int effect, const char* program)
         progid=gEffects[effect]->BuildProgram(program, slog);
     }
     catch(const char* err) {
-        slog+=err;
+        std::string errStr(err);
+        slog+=errStr;
         progid=-1;
     }
     catch(const string& err) {

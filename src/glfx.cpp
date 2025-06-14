@@ -29,7 +29,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 #include <sstream>
 #include <cstdio>
 #include <cassert>
-#include <iostream>
 
 #ifndef _MSC_VER
 typedef int errno_t;
@@ -39,7 +38,6 @@ typedef int errno_t;
 #include <QOpenGLFunctions_4_3_Core>
 #include <QOpenGLContext>
 #include <QOpenGLVersionFunctionsFactory>
-#include <QtGlobal>
 
 // workaround for Linux distributions that haven't yet upgraded to GLEW 1.9
 #ifndef GL_COMPUTE_SHADER
@@ -108,7 +106,7 @@ unsigned Program::CompileAndLink(string& log) const
     auto *ctx = QOpenGLContext::currentContext();
     auto *f = QOpenGLVersionFunctionsFactory::get<QOpenGLFunctions_4_3_Core>(ctx);
 
-    GLuint programId = f->glCreateProgram();
+    GLuint programId=f->glCreateProgram();
     
     GLint res=1;
     GLenum shaderTypes[NUM_OF_SHADER_TYPES]={GL_VERTEX_SHADER,
@@ -124,6 +122,7 @@ unsigned Program::CompileAndLink(string& log) const
             f->glAttachShader(programId, shaders.back());
         }
     }
+    
     if(m_separable)
         f->glProgramParameteri(programId, GL_PROGRAM_SEPARABLE, GL_TRUE);
 

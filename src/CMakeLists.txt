@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.16.0)
 
-project(glfx)
-
 FILE( GLOB GRAMMAR_FILES
 "glfx.ypp"
 "glfx.lpp"
@@ -27,21 +25,14 @@ SOURCE_GROUP( "Source Files" FILES ${SOURCE_FILES} )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
-if(CMAKE_VERSION VERSION_LESS "3.7.0")
-    set(CMAKE_INCLUDE_CURRENT_DIR ON)
-endif()
-
 IF(WIN32)
     include_directories("./../include" )
 ELSEIF(UNIX)
     include_directories( "./../include" )
 ENDIF(WIN32)
 
-find_package(Qt6 COMPONENTS Gui OpenGL REQUIRED)
+find_package(Qt6 COMPONENTS OpenGL REQUIRED)
+qt_standard_project_setup()
 
 qt_add_library( glfx SHARED ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 qt_add_library( glfx_static STATIC ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
@@ -54,8 +45,8 @@ set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICO
 set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC")
 ENDIF(WIN32)
 
-target_link_libraries(glfx Qt6::Gui Qt6::OpenGL)
-target_link_libraries(glfx_static Qt6::Gui Qt6::OpenGL)
+target_link_libraries(glfx Qt6::OpenGL)
+target_link_libraries(glfx_static Qt6::OpenGL)
 
 IF(NOT WIN32)
 INSTALL(FILES ./../include/gl/glfx.h DESTINATION ${INCLUDE_INSTALL_DIR})

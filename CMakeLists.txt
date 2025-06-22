@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.16.0)
+project(glfx)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules")
 

@@ -25,16 +25,22 @@ SOURCE_GROUP( "Source Files" FILES ${SOURCE_FILES} )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-include_directories("./../include" )
-
 find_package(Qt6 COMPONENTS OpenGL REQUIRED)
 qt_standard_project_setup()
 
 qt_add_library( glfx SHARED ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 qt_add_library( glfx_static STATIC ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 
-#target_include_directories(glfx PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-#target_include_directories(glfx_static PUBLIC "./../include")
+target_include_directories(glfx
+        PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
+target_include_directories(glfx_static
+        PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 
 IF(WIN32)
 set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DWIN32 -DUNICODE -D_UNICODE -DGLFX_BUILD" )
@@ -51,18 +57,21 @@ INSTALL(TARGETS glfx glfx_static
         EXPORT glfxTargets
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
-        PUBLIC_HEADER DESTINATION include/GL)
+        ARCHIVE DESTINATION lib)
 
 INSTALL(EXPORT glfxTargets
         FILE glfxTargets.cmake
         DESTINATION "${CMAKE_INSTALL_DATADIR}/glfx/cmake"
         NAMESPACE glfx::)
 
+install(FILES "../include/gl/glfx.h"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gl
+)
+
 INCLUDE(CMakePackageConfigHelpers)
 configure_package_config_file(glfxConfig.cmake.in
                               "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake"
-                              INSTALL_DESTINATION "${CMAKE_INSTALL_DATADIR}/glfx/cmake"
+                              INSTALL_DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/glfx"
 )
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake" DESTINATION "${CMAKE_INSTALL_DATADIR}/glfx/cmake")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake" DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/glfx")

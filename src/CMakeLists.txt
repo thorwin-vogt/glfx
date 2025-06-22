@@ -25,17 +25,16 @@ SOURCE_GROUP( "Source Files" FILES ${SOURCE_FILES} )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-IF(WIN32)
-    include_directories("./../include" )
-ELSEIF(UNIX)
-    include_directories( "./../include" )
-ENDIF(WIN32)
+include_directories("./../include" )
 
 find_package(Qt6 COMPONENTS OpenGL REQUIRED)
 qt_standard_project_setup()
 
 qt_add_library( glfx SHARED ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 qt_add_library( glfx_static STATIC ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
+
+#target_include_directories(glfx PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+#target_include_directories(glfx_static PUBLIC "./../include")
 
 IF(WIN32)
 set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DWIN32 -DUNICODE -D_UNICODE -DGLFX_BUILD" )
@@ -48,16 +47,22 @@ ENDIF(WIN32)
 target_link_libraries(glfx Qt6::OpenGL)
 target_link_libraries(glfx_static Qt6::OpenGL)
 
-IF(NOT WIN32)
-INSTALL(FILES ./../include/gl/glfx.h DESTINATION ${INCLUDE_INSTALL_DIR})
-INSTALL(FILES ${CMAKE_BINARY_DIR}/src/libglfx_static.a DESTINATION ${LIB_DESTINATION})
-INSTALL(FILES ${CMAKE_BINARY_DIR}/src/libglfx.so DESTINATION ${LIB_DESTINATION})
-ENDIF(NOT WIN32)
+INSTALL(TARGETS glfx glfx_static
+        EXPORT glfxTargets
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        PUBLIC_HEADER DESTINATION include/GL)
 
-IF(WIN32)
-INSTALL(FILES ./../include/gl/glfx.h DESTINATION ${INCLUDE_INSTALL_DIR})
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/glfx_static.lib DESTINATION ${LIB_DESTINATION})
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/glfx.dll DESTINATION ${LIB_DESTINATION})
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/glfx.lib DESTINATION ${LIB_DESTINATION})
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/glfx.exp DESTINATION ${LIB_DESTINATION})
-ENDIF(WIN32)
+INSTALL(EXPORT glfxTargets
+        FILE glfxTargets.cmake
+        DESTINATION "${CMAKE_INSTALL_DATADIR}/glfx/cmake"
+        NAMESPACE glfx::)
+
+INCLUDE(CMakePackageConfigHelpers)
+configure_package_config_file(glfxConfig.cmake.in
+                              "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake"
+                              INSTALL_DESTINATION "${CMAKE_INSTALL_DATADIR}/glfx/cmake"
+)
+
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake" DESTINATION "${CMAKE_INSTALL_DATADIR}/glfx/cmake")

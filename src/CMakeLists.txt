@@ -65,7 +65,7 @@ INSTALL(EXPORT glfxTargets
         NAMESPACE glfx::)
 
 install(FILES "../include/gl/glfx.h"
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/gl
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/GL
 )
 
 INCLUDE(CMakePackageConfigHelpers)

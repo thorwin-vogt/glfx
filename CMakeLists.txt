@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.16.0)
-project(glfx)
+project(glfx VERSION 0.7.5)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules")
 set(CMAKE_DEBUG_POSTFIX "d")
 
-set(GLFX_VERSION 0.7.5)
+set(GLFX_VERSION ${CMAKE_PROJECT_VERSION})
 
 SET(PKGCONFIG_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/pkgconfig/" CACHE STRING "Base directory for pkgconfig files")
 IF(NOT WIN32)

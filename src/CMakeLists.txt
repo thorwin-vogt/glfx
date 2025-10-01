@@ -61,7 +61,7 @@ INSTALL(TARGETS glfx glfx_static
 
 INSTALL(EXPORT glfxTargets
         FILE glfxTargets.cmake
-        DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/glfx"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/glfx"
         NAMESPACE glfx::)
 
 install(FILES "../include/gl/glfx.h"
@@ -71,7 +71,7 @@ install(FILES "../include/gl/glfx.h"
 INCLUDE(CMakePackageConfigHelpers)
 configure_package_config_file(glfxConfig.cmake.in
                               "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake"
-                              INSTALL_DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/glfx"
+                              INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/glfx"
 )
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake" DESTINATION "${CMAKE_INSTALL_DATADIR}/cmake/glfx")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/glfxConfig.cmake" DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/glfx")

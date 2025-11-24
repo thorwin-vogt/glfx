@@ -445,7 +445,7 @@ bool GLFX_APIENTRY glfxParseEffectFromFile( int effect, const char* file )
 {
     bool retVal=true;
     
-    fopen_s(&glfxin, file, "r");
+    fopen_s(&glfxin, file, "rt");
     if(glfxin==NULL) {
         gEffects[effect]->Log()<<"Cannot open file "<<file<<endl;
         gEffects[effect]->Active()=false;

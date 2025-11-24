@@ -5,12 +5,16 @@
       "name": "windows-base",
       "generator": "Ninja",
       "hidden": true,
-      "binaryDir": "${sourceDir}/build",
+      "binaryDir": "${sourceDir}/build-win-${presetName}",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
       },
       "environment": {
-        "QT_PLUGIN_PATH": "${sourceDir}/build/vcpkg_installed/x64-windows/Qt6/plugins;${sourceDir}/build/vcpkg_installed/x64-windows/debug/Qt6/plugins"
+        "QT_PLUGIN_PATH": "${sourceDir}/build-win-${presetName}/vcpkg_installed/x64-windows/Qt6/plugins;${sourceDir}/build-win-${presetName}/vcpkg_installed/x64-windows/debug/Qt6/plugins"
+      },
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
       },
       "condition": {
         "type": "equals",
@@ -33,11 +37,10 @@
     {
       "name": "x64-release",
       "displayName": "x64 Release",
-      "inherits": "x64-debug",
+      "inherits": "windows-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
     }
-
   ]
 }

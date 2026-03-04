@@ -28,32 +28,27 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 COMPONENTS OpenGL REQUIRED)
 qt_standard_project_setup()
 
-qt_add_library( glfx SHARED ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
-qt_add_library( glfx_static STATIC ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
+qt_add_library( glfx ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 
 target_include_directories(glfx
         PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-target_include_directories(glfx_static
-        PUBLIC
-        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
-)
 
 IF(WIN32)
-set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DWIN32 -DUNICODE -D_UNICODE -DGLFX_BUILD" )
-set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DWIN32 -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC")
+target_compile_definitions(glfx PRIVATE WIN32 UNICODE _UNICODE GLFX_BUILD)
 ELSEIF(UNIX)
-set_target_properties( glfx PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICODE -DGLFX_BUILD" )
-set_target_properties( glfx_static PROPERTIES COMPILE_FLAGS "-DLINUX -DUNICODE -D_UNICODE -DGLFX_BUILD -DGLFX_STATIC")
+target_compile_definitions(glfx PRIVATE LINUX UNICODE _UNICODE GLFX_BUILD)
 ENDIF(WIN32)
 
-target_link_libraries(glfx Qt6::OpenGL)
-target_link_libraries(glfx_static Qt6::OpenGL)
+if(BUILD_SHARED_LIBS)
+target_compile_definitions(glfx PRIVATE GLFX_STATIC)
+endif()
 
-INSTALL(TARGETS glfx glfx_static
+target_link_libraries(glfx Qt6::OpenGL)
+
+INSTALL(TARGETS glfx
         EXPORT glfxTargets
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib

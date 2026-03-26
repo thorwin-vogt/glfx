@@ -1,4 +1,4 @@
-%name-prefix "glfx"
+%define api.prefix {glfx}
 %output "glfxLALRParser.cpp"
 
 %{
@@ -30,6 +30,8 @@
     static void errSyn();
     static void errSem(const string& str, int line=-1);
 %}
+
+%define api.value.type {glfxstype}
 
 %token 	SHADER PROGRAM INTERFACE IDENTIFIER STORAGEQ GL_FRAGDEPTH STORAGET SHADER_TYPE
 %token	LP RP LB RB SC COMMA COLON EQUALS NUM INCLUDE SAMPLER FLOAT EMPTY_ARRAY_BRACKETS
@@ -323,8 +325,8 @@ shader_def : SHADER_TYPE LP NUM RP EQUALS IDENTIFIER LP RP shader_layout SC {
     ostringstream theShader;
     
     theShader<<"#version "<<$3.num<<endl;
-    theShader<<$9.strs[0];
     theShader<<gEffect->m_sharedCode.str();
+    theShader<<$9.strs[0];
     map<string, string>::const_iterator it=gEffect->m_shaders.find($6.strs[0]);
     if(it==gEffect->m_shaders.end()) {
         ostringstream errMsg;

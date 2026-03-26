@@ -1,19 +1,20 @@
-/* A Bison parser, made by GNU Bison 2.7.12-4996.  */
+/* A Bison parser, made by GNU Bison 3.5.1.  */
 
 /* Bison interface for Yacc-like parsers in C
-   
-      Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
-   
+
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2020 Free Software Foundation,
+   Inc.
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -26,72 +27,70 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+/* Undocumented macros, especially those whose name start with YY_,
+   are private implementation details.  Do not rely on them.  */
+
 #ifndef YY_GLFX_GLFXLALRPARSER_HPP_INCLUDED
 # define YY_GLFX_GLFXLALRPARSER_HPP_INCLUDED
-/* Enabling traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 0
-#endif
+/* Debug traces.  */
+#ifndef GLFXDEBUG
+# if defined YYDEBUG
 #if YYDEBUG
+#   define GLFXDEBUG 1
+#  else
+#   define GLFXDEBUG 0
+#  endif
+# else /* ! defined YYDEBUG */
+#  define GLFXDEBUG 0
+# endif /* ! defined YYDEBUG */
+#endif  /* ! defined GLFXDEBUG */
+#if GLFXDEBUG
 extern int glfxdebug;
 #endif
 
-/* Tokens.  */
-#ifndef YYTOKENTYPE
-# define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     SHADER = 258,
-     PROGRAM = 259,
-     INTERFACE = 260,
-     IDENTIFIER = 261,
-     STORAGEQ = 262,
-     GL_FRAGDEPTH = 263,
-     STORAGET = 264,
-     SHADER_TYPE = 265,
-     LP = 266,
-     RP = 267,
-     LB = 268,
-     RB = 269,
-     SC = 270,
-     COMMA = 271,
-     COLON = 272,
-     EQUALS = 273,
-     NUM = 274,
-     INCLUDE = 275,
-     SAMPLER = 276,
-     FLOAT = 277,
-     EMPTY_ARRAY_BRACKETS = 278
-   };
+/* Token type.  */
+#ifndef GLFXTOKENTYPE
+# define GLFXTOKENTYPE
+  enum glfxtokentype
+  {
+    SHADER = 258,
+    PROGRAM = 259,
+    INTERFACE = 260,
+    IDENTIFIER = 261,
+    STORAGEQ = 262,
+    GL_FRAGDEPTH = 263,
+    STORAGET = 264,
+    SHADER_TYPE = 265,
+    LP = 266,
+    RP = 267,
+    LB = 268,
+    RB = 269,
+    SC = 270,
+    COMMA = 271,
+    COLON = 272,
+    EQUALS = 273,
+    NUM = 274,
+    INCLUDE = 275,
+    SAMPLER = 276,
+    FLOAT = 277,
+    EMPTY_ARRAY_BRACKETS = 278
+  };
+#endif
+
+/* Value type.  */
+#if ! defined GLFXSTYPE && ! defined GLFXSTYPE_IS_DECLARED
+typedef glfxstype GLFXSTYPE;
+# define GLFXSTYPE_IS_TRIVIAL 1
+# define GLFXSTYPE_IS_DECLARED 1
 #endif
 
 
-#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
-#endif
+extern GLFXSTYPE glfxlval;
 
-extern YYSTYPE glfxlval;
-
-#ifdef YYPARSE_PARAM
-#if defined __STDC__ || defined __cplusplus
-int glfxparse (void *YYPARSE_PARAM);
-#else
-int glfxparse ();
-#endif
-#else /* ! YYPARSE_PARAM */
-#if defined __STDC__ || defined __cplusplus
 int glfxparse (void);
-#else
-int glfxparse ();
-#endif
-#endif /* ! YYPARSE_PARAM */
 
 #endif /* !YY_GLFX_GLFXLALRPARSER_HPP_INCLUDED  */

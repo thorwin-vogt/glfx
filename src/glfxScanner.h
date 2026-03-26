@@ -2,9 +2,9 @@
 #define glfxHEADER_H 1
 #define glfxIN_HEADER 1
 
-#line 6 "glfxScanner.h"
+#line 5 "glfxScanner.h"
 
-#line 8 "glfxScanner.h"
+#line 7 "glfxScanner.h"
 
 #define  YY_INT_ALIGNED short int
 
@@ -12,10 +12,244 @@
 
 #define FLEX_SCANNER
 #define YY_FLEX_MAJOR_VERSION 2
-#define YY_FLEX_MINOR_VERSION 5
-#define YY_FLEX_SUBMINOR_VERSION 37
+#define YY_FLEX_MINOR_VERSION 6
+#define YY_FLEX_SUBMINOR_VERSION 4
 #if YY_FLEX_SUBMINOR_VERSION > 0
 #define FLEX_BETA
+#endif
+
+#ifdef yy_create_buffer
+#define glfx_create_buffer_ALREADY_DEFINED
+#else
+#define yy_create_buffer glfx_create_buffer
+#endif
+
+#ifdef yy_delete_buffer
+#define glfx_delete_buffer_ALREADY_DEFINED
+#else
+#define yy_delete_buffer glfx_delete_buffer
+#endif
+
+#ifdef yy_scan_buffer
+#define glfx_scan_buffer_ALREADY_DEFINED
+#else
+#define yy_scan_buffer glfx_scan_buffer
+#endif
+
+#ifdef yy_scan_string
+#define glfx_scan_string_ALREADY_DEFINED
+#else
+#define yy_scan_string glfx_scan_string
+#endif
+
+#ifdef yy_scan_bytes
+#define glfx_scan_bytes_ALREADY_DEFINED
+#else
+#define yy_scan_bytes glfx_scan_bytes
+#endif
+
+#ifdef yy_init_buffer
+#define glfx_init_buffer_ALREADY_DEFINED
+#else
+#define yy_init_buffer glfx_init_buffer
+#endif
+
+#ifdef yy_flush_buffer
+#define glfx_flush_buffer_ALREADY_DEFINED
+#else
+#define yy_flush_buffer glfx_flush_buffer
+#endif
+
+#ifdef yy_load_buffer_state
+#define glfx_load_buffer_state_ALREADY_DEFINED
+#else
+#define yy_load_buffer_state glfx_load_buffer_state
+#endif
+
+#ifdef yy_switch_to_buffer
+#define glfx_switch_to_buffer_ALREADY_DEFINED
+#else
+#define yy_switch_to_buffer glfx_switch_to_buffer
+#endif
+
+#ifdef yypush_buffer_state
+#define glfxpush_buffer_state_ALREADY_DEFINED
+#else
+#define yypush_buffer_state glfxpush_buffer_state
+#endif
+
+#ifdef yypop_buffer_state
+#define glfxpop_buffer_state_ALREADY_DEFINED
+#else
+#define yypop_buffer_state glfxpop_buffer_state
+#endif
+
+#ifdef yyensure_buffer_stack
+#define glfxensure_buffer_stack_ALREADY_DEFINED
+#else
+#define yyensure_buffer_stack glfxensure_buffer_stack
+#endif
+
+#ifdef yylex
+#define glfxlex_ALREADY_DEFINED
+#else
+#define yylex glfxlex
+#endif
+
+#ifdef yyrestart
+#define glfxrestart_ALREADY_DEFINED
+#else
+#define yyrestart glfxrestart
+#endif
+
+#ifdef yylex_init
+#define glfxlex_init_ALREADY_DEFINED
+#else
+#define yylex_init glfxlex_init
+#endif
+
+#ifdef yylex_init_extra
+#define glfxlex_init_extra_ALREADY_DEFINED
+#else
+#define yylex_init_extra glfxlex_init_extra
+#endif
+
+#ifdef yylex_destroy
+#define glfxlex_destroy_ALREADY_DEFINED
+#else
+#define yylex_destroy glfxlex_destroy
+#endif
+
+#ifdef yyget_debug
+#define glfxget_debug_ALREADY_DEFINED
+#else
+#define yyget_debug glfxget_debug
+#endif
+
+#ifdef yyset_debug
+#define glfxset_debug_ALREADY_DEFINED
+#else
+#define yyset_debug glfxset_debug
+#endif
+
+#ifdef yyget_extra
+#define glfxget_extra_ALREADY_DEFINED
+#else
+#define yyget_extra glfxget_extra
+#endif
+
+#ifdef yyset_extra
+#define glfxset_extra_ALREADY_DEFINED
+#else
+#define yyset_extra glfxset_extra
+#endif
+
+#ifdef yyget_in
+#define glfxget_in_ALREADY_DEFINED
+#else
+#define yyget_in glfxget_in
+#endif
+
+#ifdef yyset_in
+#define glfxset_in_ALREADY_DEFINED
+#else
+#define yyset_in glfxset_in
+#endif
+
+#ifdef yyget_out
+#define glfxget_out_ALREADY_DEFINED
+#else
+#define yyget_out glfxget_out
+#endif
+
+#ifdef yyset_out
+#define glfxset_out_ALREADY_DEFINED
+#else
+#define yyset_out glfxset_out
+#endif
+
+#ifdef yyget_leng
+#define glfxget_leng_ALREADY_DEFINED
+#else
+#define yyget_leng glfxget_leng
+#endif
+
+#ifdef yyget_text
+#define glfxget_text_ALREADY_DEFINED
+#else
+#define yyget_text glfxget_text
+#endif
+
+#ifdef yyget_lineno
+#define glfxget_lineno_ALREADY_DEFINED
+#else
+#define yyget_lineno glfxget_lineno
+#endif
+
+#ifdef yyset_lineno
+#define glfxset_lineno_ALREADY_DEFINED
+#else
+#define yyset_lineno glfxset_lineno
+#endif
+
+#ifdef yywrap
+#define glfxwrap_ALREADY_DEFINED
+#else
+#define yywrap glfxwrap
+#endif
+
+#ifdef yyalloc
+#define glfxalloc_ALREADY_DEFINED
+#else
+#define yyalloc glfxalloc
+#endif
+
+#ifdef yyrealloc
+#define glfxrealloc_ALREADY_DEFINED
+#else
+#define yyrealloc glfxrealloc
+#endif
+
+#ifdef yyfree
+#define glfxfree_ALREADY_DEFINED
+#else
+#define yyfree glfxfree
+#endif
+
+#ifdef yytext
+#define glfxtext_ALREADY_DEFINED
+#else
+#define yytext glfxtext
+#endif
+
+#ifdef yyleng
+#define glfxleng_ALREADY_DEFINED
+#else
+#define yyleng glfxleng
+#endif
+
+#ifdef yyin
+#define glfxin_ALREADY_DEFINED
+#else
+#define yyin glfxin
+#endif
+
+#ifdef yyout
+#define glfxout_ALREADY_DEFINED
+#else
+#define yyout glfxout
+#endif
+
+#ifdef yy_flex_debug
+#define glfx_flex_debug_ALREADY_DEFINED
+#else
+#define yy_flex_debug glfx_flex_debug
+#endif
+
+#ifdef yylineno
+#define glfxlineno_ALREADY_DEFINED
+#else
+#define yylineno glfxlineno
 #endif
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
@@ -88,34 +322,36 @@ typedef unsigned int flex_uint32_t;
 #define UINT32_MAX             (4294967295U)
 #endif
 
+#ifndef SIZE_MAX
+#define SIZE_MAX               (~(size_t)0)
+#endif
+
 #endif /* ! C99 */
 
 #endif /* ! FLEXINT_H */
 
-#ifdef __cplusplus
+/* begin standard C++ headers. */
 
-/* The "const" storage-class-modifier is valid. */
-#define YY_USE_CONST
-
-#else	/* ! __cplusplus */
-
-/* C99 requires __STDC__ to be defined as 1. */
-#if defined (__STDC__)
-
-#define YY_USE_CONST
-
-#endif	/* defined (__STDC__) */
-#endif	/* ! __cplusplus */
-
-#ifdef YY_USE_CONST
+/* TODO: this is always defined, so inline it */
 #define yyconst const
+
+#if defined(__GNUC__) && __GNUC__ >= 3
+#define yynoreturn __attribute__((__noreturn__))
 #else
-#define yyconst
+#define yynoreturn
 #endif
 
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
+#ifdef __ia64__
+/* On IA-64, the buffer size is 16k, not 8k.
+ * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
+ * Ditto for the __ia64__ case accordingly.
+ */
+#define YY_BUF_SIZE 32768
+#else
 #define YY_BUF_SIZE 16384
+#endif /* __ia64__ */
 #endif
 
 #ifndef YY_TYPEDEF_YY_BUFFER_STATE
@@ -128,9 +364,9 @@ typedef struct yy_buffer_state *YY_BUFFER_STATE;
 typedef size_t yy_size_t;
 #endif
 
-extern yy_size_t glfxleng;
+extern int yyleng;
 
-extern FILE *glfxin, *glfxout;
+extern FILE *yyin, *yyout;
 
 #ifndef YY_STRUCT_YY_BUFFER_STATE
 #define YY_STRUCT_YY_BUFFER_STATE
@@ -144,12 +380,12 @@ struct yy_buffer_state
 	/* Size of input buffer in bytes, not including room for EOB
 	 * characters.
 	 */
-	yy_size_t yy_buf_size;
+	int yy_buf_size;
 
 	/* Number of characters read into yy_ch_buf, not including EOB
 	 * characters.
 	 */
-	yy_size_t yy_n_chars;
+	int yy_n_chars;
 
 	/* Whether we "own" the buffer - i.e., we know we created it,
 	 * and can realloc() it to grow it, and should free() it to
@@ -172,7 +408,7 @@ struct yy_buffer_state
 
     int yy_bs_lineno; /**< The line count. */
     int yy_bs_column; /**< The column count. */
-    
+
 	/* Whether to try to fill the input buffer when we reach the
 	 * end of it.
 	 */
@@ -183,31 +419,34 @@ struct yy_buffer_state
 	};
 #endif /* !YY_STRUCT_YY_BUFFER_STATE */
 
-void glfxrestart (FILE *input_file  );
-void glfx_switch_to_buffer (YY_BUFFER_STATE new_buffer  );
-YY_BUFFER_STATE glfx_create_buffer (FILE *file,int size  );
-void glfx_delete_buffer (YY_BUFFER_STATE b  );
-void glfx_flush_buffer (YY_BUFFER_STATE b  );
-void glfxpush_buffer_state (YY_BUFFER_STATE new_buffer  );
-void glfxpop_buffer_state (void );
+void yyrestart ( FILE *input_file  );
+void yy_switch_to_buffer ( YY_BUFFER_STATE new_buffer  );
+YY_BUFFER_STATE yy_create_buffer ( FILE *file, int size  );
+void yy_delete_buffer ( YY_BUFFER_STATE b  );
+void yy_flush_buffer ( YY_BUFFER_STATE b  );
+void yypush_buffer_state ( YY_BUFFER_STATE new_buffer  );
+void yypop_buffer_state ( void );
 
-YY_BUFFER_STATE glfx_scan_buffer (char *base,yy_size_t size  );
-YY_BUFFER_STATE glfx_scan_string (yyconst char *yy_str  );
-YY_BUFFER_STATE glfx_scan_bytes (yyconst char *bytes,yy_size_t len  );
+YY_BUFFER_STATE yy_scan_buffer ( char *base, yy_size_t size  );
+YY_BUFFER_STATE yy_scan_string ( const char *yy_str  );
+YY_BUFFER_STATE yy_scan_bytes ( const char *bytes, int len  );
 
-void *glfxalloc (yy_size_t  );
-void *glfxrealloc (void *,yy_size_t  );
-void glfxfree (void *  );
+void *yyalloc ( yy_size_t  );
+void *yyrealloc ( void *, yy_size_t  );
+void yyfree ( void *  );
 
 /* Begin user sect3 */
 
-#define glfxwrap() 1
+#define glfxwrap() (/*CONSTCOND*/1)
 #define YY_SKIP_YYWRAP
 
-extern int glfxlineno;
+extern int yylineno;
 
-extern char *glfxtext;
-#define yytext_ptr glfxtext
+extern char *yytext;
+#ifdef yytext_ptr
+#undef yytext_ptr
+#endif
+#define yytext_ptr yytext
 
 #ifdef YY_HEADER_EXPORT_START_CONDITIONS
 #define INITIAL 0
@@ -229,31 +468,31 @@ extern char *glfxtext;
 /* Accessor methods to globals.
    These are made visible to non-reentrant scanners for convenience. */
 
-int glfxlex_destroy (void );
+int yylex_destroy ( void );
 
-int glfxget_debug (void );
+int yyget_debug ( void );
 
-void glfxset_debug (int debug_flag  );
+void yyset_debug ( int debug_flag  );
 
-YY_EXTRA_TYPE glfxget_extra (void );
+YY_EXTRA_TYPE yyget_extra ( void );
 
-void glfxset_extra (YY_EXTRA_TYPE user_defined  );
+void yyset_extra ( YY_EXTRA_TYPE user_defined  );
 
-FILE *glfxget_in (void );
+FILE *yyget_in ( void );
 
-void glfxset_in  (FILE * in_str  );
+void yyset_in  ( FILE * _in_str  );
 
-FILE *glfxget_out (void );
+FILE *yyget_out ( void );
 
-void glfxset_out  (FILE * out_str  );
+void yyset_out  ( FILE * _out_str  );
 
-yy_size_t glfxget_leng (void );
+			int yyget_leng ( void );
 
-char *glfxget_text (void );
+char *yyget_text ( void );
 
-int glfxget_lineno (void );
+int yyget_lineno ( void );
 
-void glfxset_lineno (int line_number  );
+void yyset_lineno ( int _line_number  );
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -261,18 +500,18 @@ void glfxset_lineno (int line_number  );
 
 #ifndef YY_SKIP_YYWRAP
 #ifdef __cplusplus
-extern "C" int glfxwrap (void );
+extern "C" int yywrap ( void );
 #else
-extern int glfxwrap (void );
+extern int yywrap ( void );
 #endif
 #endif
 
 #ifndef yytext_ptr
-static void yy_flex_strncpy (char *,yyconst char *,int );
+static void yy_flex_strncpy ( char *, const char *, int );
 #endif
 
 #ifdef YY_NEED_STRLEN
-static int yy_flex_strlen (yyconst char * );
+static int yy_flex_strlen ( const char * );
 #endif
 
 #ifndef YY_NO_INPUT
@@ -281,7 +520,12 @@ static int yy_flex_strlen (yyconst char * );
 
 /* Amount of stuff to slurp up with each read. */
 #ifndef YY_READ_BUF_SIZE
+#ifdef __ia64__
+/* On IA-64, the buffer size is 16k, not 8k */
+#define YY_READ_BUF_SIZE 16384
+#else
 #define YY_READ_BUF_SIZE 8192
+#endif /* __ia64__ */
 #endif
 
 /* Number of entries by which start-condition stack grows. */
@@ -295,9 +539,9 @@ static int yy_flex_strlen (yyconst char * );
 #ifndef YY_DECL
 #define YY_DECL_IS_OURS 1
 
-extern int glfxlex (void);
+extern int yylex (void);
 
-#define YY_DECL int glfxlex (void)
+#define YY_DECL int yylex (void)
 #endif /* !YY_DECL */
 
 /* yy_get_previous_state - get the state just before the EOB char was reached */
@@ -314,9 +558,154 @@ extern int glfxlex (void);
 #undef YY_DECL
 #endif
 
+#ifndef glfx_create_buffer_ALREADY_DEFINED
+#undef yy_create_buffer
+#endif
+#ifndef glfx_delete_buffer_ALREADY_DEFINED
+#undef yy_delete_buffer
+#endif
+#ifndef glfx_scan_buffer_ALREADY_DEFINED
+#undef yy_scan_buffer
+#endif
+#ifndef glfx_scan_string_ALREADY_DEFINED
+#undef yy_scan_string
+#endif
+#ifndef glfx_scan_bytes_ALREADY_DEFINED
+#undef yy_scan_bytes
+#endif
+#ifndef glfx_init_buffer_ALREADY_DEFINED
+#undef yy_init_buffer
+#endif
+#ifndef glfx_flush_buffer_ALREADY_DEFINED
+#undef yy_flush_buffer
+#endif
+#ifndef glfx_load_buffer_state_ALREADY_DEFINED
+#undef yy_load_buffer_state
+#endif
+#ifndef glfx_switch_to_buffer_ALREADY_DEFINED
+#undef yy_switch_to_buffer
+#endif
+#ifndef glfxpush_buffer_state_ALREADY_DEFINED
+#undef yypush_buffer_state
+#endif
+#ifndef glfxpop_buffer_state_ALREADY_DEFINED
+#undef yypop_buffer_state
+#endif
+#ifndef glfxensure_buffer_stack_ALREADY_DEFINED
+#undef yyensure_buffer_stack
+#endif
+#ifndef glfxlex_ALREADY_DEFINED
+#undef yylex
+#endif
+#ifndef glfxrestart_ALREADY_DEFINED
+#undef yyrestart
+#endif
+#ifndef glfxlex_init_ALREADY_DEFINED
+#undef yylex_init
+#endif
+#ifndef glfxlex_init_extra_ALREADY_DEFINED
+#undef yylex_init_extra
+#endif
+#ifndef glfxlex_destroy_ALREADY_DEFINED
+#undef yylex_destroy
+#endif
+#ifndef glfxget_debug_ALREADY_DEFINED
+#undef yyget_debug
+#endif
+#ifndef glfxset_debug_ALREADY_DEFINED
+#undef yyset_debug
+#endif
+#ifndef glfxget_extra_ALREADY_DEFINED
+#undef yyget_extra
+#endif
+#ifndef glfxset_extra_ALREADY_DEFINED
+#undef yyset_extra
+#endif
+#ifndef glfxget_in_ALREADY_DEFINED
+#undef yyget_in
+#endif
+#ifndef glfxset_in_ALREADY_DEFINED
+#undef yyset_in
+#endif
+#ifndef glfxget_out_ALREADY_DEFINED
+#undef yyget_out
+#endif
+#ifndef glfxset_out_ALREADY_DEFINED
+#undef yyset_out
+#endif
+#ifndef glfxget_leng_ALREADY_DEFINED
+#undef yyget_leng
+#endif
+#ifndef glfxget_text_ALREADY_DEFINED
+#undef yyget_text
+#endif
+#ifndef glfxget_lineno_ALREADY_DEFINED
+#undef yyget_lineno
+#endif
+#ifndef glfxset_lineno_ALREADY_DEFINED
+#undef yyset_lineno
+#endif
+#ifndef glfxget_column_ALREADY_DEFINED
+#undef yyget_column
+#endif
+#ifndef glfxset_column_ALREADY_DEFINED
+#undef yyset_column
+#endif
+#ifndef glfxwrap_ALREADY_DEFINED
+#undef yywrap
+#endif
+#ifndef glfxget_lval_ALREADY_DEFINED
+#undef yyget_lval
+#endif
+#ifndef glfxset_lval_ALREADY_DEFINED
+#undef yyset_lval
+#endif
+#ifndef glfxget_lloc_ALREADY_DEFINED
+#undef yyget_lloc
+#endif
+#ifndef glfxset_lloc_ALREADY_DEFINED
+#undef yyset_lloc
+#endif
+#ifndef glfxalloc_ALREADY_DEFINED
+#undef yyalloc
+#endif
+#ifndef glfxrealloc_ALREADY_DEFINED
+#undef yyrealloc
+#endif
+#ifndef glfxfree_ALREADY_DEFINED
+#undef yyfree
+#endif
+#ifndef glfxtext_ALREADY_DEFINED
+#undef yytext
+#endif
+#ifndef glfxleng_ALREADY_DEFINED
+#undef yyleng
+#endif
+#ifndef glfxin_ALREADY_DEFINED
+#undef yyin
+#endif
+#ifndef glfxout_ALREADY_DEFINED
+#undef yyout
+#endif
+#ifndef glfx_flex_debug_ALREADY_DEFINED
+#undef yy_flex_debug
+#endif
+#ifndef glfxlineno_ALREADY_DEFINED
+#undef yylineno
+#endif
+#ifndef glfxtables_fload_ALREADY_DEFINED
+#undef yytables_fload
+#endif
+#ifndef glfxtables_destroy_ALREADY_DEFINED
+#undef yytables_destroy
+#endif
+#ifndef glfxTABLES_NAME_ALREADY_DEFINED
+#undef yyTABLES_NAME
+#endif
+
 #line 96 "glfx.lpp"
 
 
-#line 321 "glfxScanner.h"
+#line 709 "glfxScanner.h"
 #undef glfxIN_HEADER
 #endif /* glfxHEADER_H */

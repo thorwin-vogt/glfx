@@ -92,8 +92,6 @@ int fopen_s(FILE** pFile, const char *filename, const char *mode);
 
 }
 
-#define YYSTYPE glfxstype
-
 #if 0
 #define YYDEBUG 1
 extern int glfxdebug;

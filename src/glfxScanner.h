@@ -703,7 +703,7 @@ extern int yylex (void);
 #undef yyTABLES_NAME
 #endif
 
-#line 96 "glfx.lpp"
+#line 99 "glfx.lpp"
 
 
 #line 709 "glfxScanner.h"

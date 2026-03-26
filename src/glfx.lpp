@@ -91,6 +91,9 @@ FLOAT_BLCK [0-9]*((\.[0-9])|([0-9]\.))[0-9]*
 ":"                                             if(gLexPassthrough) gEffect->m_sharedCode<<yytext; else {return COLON;}
 \/\/[^\n\\]*(\\+[^\\][^\n\\]*)*\n               if(gLexPassthrough) gEffect->m_sharedCode<<yytext; // Single line comment (with possible continuation)
 \/\*[^*]*\*(([^*/][^*]*)*\*)*\/                 if(gLexPassthrough) gEffect->m_sharedCode<<yytext; // Multiline comment
+\r\n                                            { yylineno++; if(gLexPassthrough) gEffect->m_sharedCode << "\n"; }
+\r                                              { yylineno++; if(gLexPassthrough) gEffect->m_sharedCode << "\n"; }
+\n                                              { yylineno++; if(gLexPassthrough) gEffect->m_sharedCode << "\n"; }
 [\t\n ]                                         if(gLexPassthrough) gEffect->m_sharedCode<<yytext;
 .                                               if(gLexPassthrough) gEffect->m_sharedCode<<yytext; else {errLex(yytext);}
 %%

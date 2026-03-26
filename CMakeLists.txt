@@ -6,6 +6,8 @@ set(CMAKE_DEBUG_POSTFIX "d")
 
 set(GLFX_VERSION ${CMAKE_PROJECT_VERSION})
 
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
+
 SET(PKGCONFIG_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/pkgconfig/" CACHE STRING "Base directory for pkgconfig files")
 IF(NOT WIN32)
     CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/glfx.pc.cmake ${CMAKE_CURRENT_BINARY_DIR}/glfx.pc @ONLY)

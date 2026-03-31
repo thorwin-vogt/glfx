@@ -871,17 +871,17 @@ static const struct yy_trans_info yy_transition[4234] =
  {  33,-314 }, {  34,-314 }, {  35,-314 }, {  36,-314 }, {  37,-314 },
  {  38,-314 }, {  39,-314 }, {  40, 800 }, {  41,-314 }, {  42,-314 },
  {   0,  20 }, {   0,3150 }, {   0,   0 }, {   0,3148 }, {   0,   0 },
- {   2,   5 }, {   3,  10 }, {   0,   0 }, {   0,3143 }, {   0,   0 },
+ {   2,   6 }, {   3,  14 }, {   4,  44 }, {   0,   0 }, {   0,3142 },
 
- {   2,   0 }, {   3,   5 }, {   0,   6 }, {   0,3138 }, {  13,-358 },
- {  14,-358 }, {   0,   0 }, {   0,   0 }, {   0,   0 }, {  18,-358 },
+ {   0,   0 }, {   2,   0 }, {   3,   8 }, {   4,  38 }, {  13,-358 },
+ {  14,-358 }, {   0,   6 }, {   0,3134 }, {   0,   0 }, {  18,-358 },
  {  19,-358 }, {  20,-358 }, {   0,   0 }, {   0,   0 }, {   0,   0 },
  {  24,-358 }, {  25,-358 }, {  26,-358 }, {  27,-358 }, {  28,-358 },
  {  29,-358 }, {  30,-358 }, {  31,-358 }, {  32,-358 }, {  33,-358 },
  {  34,-358 }, {  35,-358 }, {  36,-358 }, {  37,-358 }, {  38,-358 },
  {  39,-358 }, {  40, 800 }, {  41,-358 }, {  42,-358 }, {   0,  20 },
- {   0,3106 }, {   0,   0 }, {   0,   0 }, {   0,   0 }, {   0,   0 },
- {   0,   0 }, {   0,   0 }, {   0,   0 }, {   0,   0 }, {   0,   0 },
+ {   0,3106 }, {   0,   0 }, {   0,3104 }, {   0,   0 }, {   0,   0 },
+ {   3, -30 }, {   0,   0 }, {   0,   0 }, {   0,   0 }, {   0,   0 },
  {   0,   0 }, {   0,   0 }, {   0,   0 }, {  13,-402 }, {  14,-402 },
 
  {   0,   0 }, {   0,   0 }, {   0,   0 }, {  18,-402 }, {  19,-402 },
@@ -2104,18 +2104,18 @@ case 32:
 /* rule 32 can match eol */
 YY_RULE_SETUP
 #line 94 "glfx.lpp"
-{ yylineno++; if(gLexPassthrough) gEffect->m_sharedCode << "\n"; }
+if(gLexPassthrough) gEffect->m_sharedCode << "\n"; // Windows line endings
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 95 "glfx.lpp"
-{ yylineno++; if(gLexPassthrough) gEffect->m_sharedCode << "\n"; }
+if(gLexPassthrough) gEffect->m_sharedCode << "\n"; // Classic MacOS line endings
 	YY_BREAK
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
 #line 96 "glfx.lpp"
-{ yylineno++; if(gLexPassthrough) gEffect->m_sharedCode << "\n"; }
+if(gLexPassthrough) gEffect->m_sharedCode << "\n"; // Linux line endings
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */

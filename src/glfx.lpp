@@ -58,7 +58,7 @@ FLOAT_BLCK [0-9]*((\.[0-9])|([0-9]\.))[0-9]*
 "shader"                                        glfxlval.lineno=yylineno; return SHADER;
 "interface"                                     glfxlval.lineno=yylineno; return INTERFACE;
 "sampler"                                       glfxlval.lineno=yylineno; glfxlval.strs[0]=yytext; return SAMPLER;
-^"#include"[\t ]+{STR_BLCK}[\t ]*\n             {
+^"#include"[\t ]+{STR_BLCK}[\t ]*\r?\n          {
                                                     string tmp(yytext);
                                                     size_t firstLoc=tmp.find('"')+1;
                                                     size_t secondLoc=tmp.find('"', firstLoc);
@@ -89,7 +89,7 @@ FLOAT_BLCK [0-9]*((\.[0-9])|([0-9]\.))[0-9]*
 "="                                             if(gLexPassthrough) gEffect->m_sharedCode<<yytext; else {return EQUALS;}
 ";"                                             if(gLexPassthrough) gEffect->m_sharedCode<<yytext; else {return SC;}
 ":"                                             if(gLexPassthrough) gEffect->m_sharedCode<<yytext; else {return COLON;}
-\/\/[^\n\\]*(\\+[^\\][^\n\\]*)*\n               if(gLexPassthrough) gEffect->m_sharedCode<<yytext; // Single line comment (with possible continuation)
+\/\/[^\n\\]*(\\+[^\\][^\n\\]*)*\r?              if(gLexPassthrough) gEffect->m_sharedCode<<yytext; // Single line comment (with possible continuation)
 \/\*[^*]*\*(([^*/][^*]*)*\*)*\/                 if(gLexPassthrough) gEffect->m_sharedCode<<yytext; // Multiline comment
 \r\n                                            if(gLexPassthrough) gEffect->m_sharedCode << "\n"; // Windows line endings
 \r                                              if(gLexPassthrough) gEffect->m_sharedCode << "\n"; // Classic MacOS line endings

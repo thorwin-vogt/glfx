@@ -27,7 +27,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt6 COMPONENTS OpenGL REQUIRED)
 qt_standard_project_setup()
-qt_policy(SET QTP0003 NEW) # Enable BUILD_SHARED_LIBS for QT.
 
 qt_add_library( glfx ${GRAMMAR_FILES} ${HEADER_FILES} ${SOURCE_FILES} )
 
@@ -37,14 +36,15 @@ target_include_directories(glfx
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-IF(WIN32)
-target_compile_definitions(glfx PUBLIC WIN32 UNICODE _UNICODE GLFX_BUILD)
-ELSEIF(UNIX)
-target_compile_definitions(glfx PUBLIC LINUX UNICODE _UNICODE GLFX_BUILD)
-ENDIF(WIN32)
+if(WIN32)
+target_compile_definitions(glfx PRIVATE WIN32 UNICODE _UNICODE GLFX_BUILD)
+elseif(UNIX)
+target_compile_definitions(glfx PRIVATE LINUX UNICODE _UNICODE GLFX_BUILD)
+endif(WIN32)
 
-if(NOT BUILD_SHARED_LIBS)
-target_compile_definitions(glfx PUBLIC GLFX_STATIC)
+get_target_property(BUILD_TYPE glfx TYPE)
+if("${BUILD_TYPE}" EQUAL "STATIC_LIBRARY")
+target_compile_definitions(glfx PRIVATE GLFX_STATIC)
 endif()
 
 target_link_libraries(glfx Qt6::OpenGL)
